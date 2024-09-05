@@ -38,5 +38,19 @@ const commentPost = async (postId, userId, content) => {
     return post;
   };
 
+const deletePost = async (postId, userId) => {
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new Error('Post not found');
+    }
+    if (post.user.toString() !== userId.toString()) {
+      throw new Error('Not authorized to delete this post');
+    }
+    await Post.findByIdAndDelete(postId);
+    return post;
+};  
 
-module.exports = { createPost, likePost, commentPost };
+
+
+
+module.exports = { createPost, likePost, commentPost, deletePost };

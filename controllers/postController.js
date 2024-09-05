@@ -34,3 +34,14 @@ module.exports.commentPost = async (req, res) => {
       return errorResponse(res, error.message);
     }
   };
+
+module.exports.deletePost = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const { postId } = req.params;
+      await postService.deletePost(postId, userId);
+      return successResponse(res, 'Post deleted successfully');
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };  
