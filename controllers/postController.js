@@ -11,3 +11,14 @@ module.exports.createPost = async (req, res) => {
         return errorResponse(res, err.message);
     }
 }
+
+module.exports.likePost = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const { postId } = req.params;
+      const post = await postService.likePost(postId, userId);
+      return successResponse(res,post,'Post liked/unliked successfully', 201);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };
