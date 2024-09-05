@@ -22,7 +22,21 @@ const likePost = async (postId, userId) => {
     }
     await post.save();
     return post;
+};
+
+const commentPost = async (postId, userId, content) => {
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new Error('Post not found');
+    }
+    const newComment = {
+      user: userId,
+      content: content
+    };
+    post.comments.push(newComment);
+    await post.save();
+    return post;
   };
 
 
-module.exports = { createPost, likePost };
+module.exports = { createPost, likePost, commentPost };

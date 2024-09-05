@@ -22,3 +22,15 @@ module.exports.likePost = async (req, res) => {
       return errorResponse(res, error.message);
     }
   };
+
+module.exports.commentPost = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const { postId } = req.params;
+      const { content } = req.body;
+      const post = await postService.commentPost(postId, userId, content);
+      return successResponse(res, post, 'Comment added successfully', 201);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };
