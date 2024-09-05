@@ -17,4 +17,20 @@ module.exports.signup = async (req, res) => {
     }
 }
 
+module.exports.signin = async (req, res) => { 
+    try {
+        const userData = req.body;
+        const { user, token } = await authService.signin(userData);
+        const userResponse = {
+            id: user._id,
+            firstname: user.firstname,
+            lastname: user.lastname,
+            email: user.email,
+        }
+        return  successResponse(res, { user: userResponse, token}, 'User logged in successfully', 200);
+    } catch(err) {
+        return errorResponse(res, err.message);
+    }
+}
+
  

@@ -15,6 +15,18 @@ const signup = async (userData) => {
     return {newUser, token};
 }
 
+const signin = async (userData) => {  
+    const { email, password } = userData;
+    const user = await User.findOne({ email });
 
-module.exports = { signup };
+    if(!user || !(await user.comparePassword(password))) {
+        throw new Error('Invalid credentials');
+    }
+    
+    const token = generateToken(user._id);
+    return { user, token };
+}
+
+
+module.exports = { signup, signin };
 
