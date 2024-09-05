@@ -40,7 +40,19 @@ module.exports.deletePost = async (req, res) => {
       const userId = req.userId;
       const { postId } = req.params;
       await postService.deletePost(postId, userId);
-      return successResponse(res, 'Post deleted successfully');
+      return successResponse(res, postId,'Post deleted successfully',200);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };
+  
+  module.exports.updatePost = async (req, res) => {
+    try {
+      const userId = req.userId;
+      const { postId } = req.params;
+      const { content } = req.body;
+      const post = await postService.updatePost(postId, userId, content);
+      return successResponse(res, post,'Post updated successfully', 200);
     } catch (error) {
       return errorResponse(res, error.message);
     }

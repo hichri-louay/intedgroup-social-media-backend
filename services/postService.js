@@ -48,9 +48,28 @@ const deletePost = async (postId, userId) => {
     }
     await Post.findByIdAndDelete(postId);
     return post;
-};  
+};
+
+const updatePost = async (postId, userId, content) => {
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new Error('Post not found');
+    }
+    if (post.user.toString() !== userId.toString()) {
+      throw new Error('Not authorized to update this post');
+    }
+    post.content = content;
+    await post.save();
+    return post;
+  };
 
 
 
 
-module.exports = { createPost, likePost, commentPost, deletePost };
+module.exports = { 
+    createPost,
+    likePost, 
+    commentPost, 
+    deletePost, 
+    updatePost 
+};
