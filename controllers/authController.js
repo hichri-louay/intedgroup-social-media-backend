@@ -7,8 +7,8 @@ module.exports.signup = async (req, res) => {
         const { newUser, token } = await authService.signup(userData);
         const userResponse = {
             id: newUser._id,
-            firstname: newUser.firstname,
-            lastname: newUser.lastname,
+            firstName: newUser.firstName,
+            lastName: newUser.lastName,
             email: newUser.email,
         }
         return  successResponse(res, { user: userResponse, token}, 'User created successfully', 201);
@@ -23,8 +23,8 @@ module.exports.signin = async (req, res) => {
         const { user, token } = await authService.signin(userData);
         const userResponse = {
             id: user._id,
-            firstname: user.firstname,
-            lastname: user.lastname,
+            firstName: user.firstName,
+            lastName: user.lastName,
             email: user.email,
         }
         return  successResponse(res, { user: userResponse, token}, 'User logged in successfully', 200);
