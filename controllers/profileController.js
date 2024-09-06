@@ -35,3 +35,24 @@ module.exports.updateUser = async (req, res) => {
         return errorResponse(res, err.message)
     }
 }
+
+module.exports.uploadProfilePicture = async (req, res) => {
+    try {
+        if (!req.file) {
+            return errorResponse(res, 'No file uploaded');
+        }
+        const userId = req.userId;
+        const fileUrl = req.file.location; 
+        const updatedUser = await profileService.updateUserProfilePicture(userId, fileUrl);
+        const userResponse = {
+            id: updatedUser._id,
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            email: updatedUser.email,
+            picture: updatedUser.picture
+        };
+        return successResponse(res, userResponse, 'Profile picture uploaded successfully');
+    } catch (err) {
+        return errorResponse(res, err.message);
+    }
+};

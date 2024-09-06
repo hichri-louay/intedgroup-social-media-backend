@@ -30,5 +30,13 @@ const updateUser = async (userId, newEmail, newFirstName, newLastName, password)
     return user
 }
 
+const updateUserProfilePicture = async (userId, fileUrl) => {
+    const user = await User.findByIdAndUpdate(userId, { picture: fileUrl }, { new: true });
+    if (!user) {
+        throw new Error('User not found');
+    }
+    return user;
+}
 
-module.exports = { changePassword, updateUser };
+
+module.exports = { changePassword, updateUser,updateUserProfilePicture };
