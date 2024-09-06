@@ -56,4 +56,15 @@ module.exports.deletePost = async (req, res) => {
     } catch (error) {
       return errorResponse(res, error.message);
     }
+  };
+  
+module.exports.deleteComment = async (req, res) => {
+    try {
+      const { postId, commentId } = req.params;
+      const userId = req.userId;
+      await postService.deleteComment(postId, commentId, userId);
+      return successResponse(res, commentId,'Comment deleted successfully',200);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
   };  

@@ -63,6 +63,25 @@ const updatePost = async (postId, userId, content) => {
     return post;
   };
 
+const deleteComment = async (postId, commentId, userId) => {
+    const post = await Post.findById(postId);
+    if (!post) {
+      throw new Error('Post not found');
+    }
+    const comment = post.comments.id(commentId);
+    if (!comment) {
+      throw new Error('Comment not found');
+    }
+    if (comment.user.toString() !== userId.toString()) {
+      throw new Error('Not authorized to delete this comment');
+    }
+    post.comments = post.comments.filter(
+      (comment) => comment._id.toString() !== commentId.toString()
+    );
+    await post.save();
+    return post;
+  };  
+
 
 
 
@@ -71,5 +90,6 @@ module.exports = {
     likePost, 
     commentPost, 
     deletePost, 
-    updatePost 
+    updatePost,
+    deleteComment
 };
