@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const swaggerSpec = require('./config/swaggerConfig');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
+const profileRoutes = require('./routes/profileRoutes');
 require('dotenv').config();
 
 
@@ -20,6 +21,7 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/post', postRoutes);
+app.use('/api/user', profileRoutes);
 
 app.listen(PORT, () => {  
     console.log(`Server is up and running on port ${PORT}`);
