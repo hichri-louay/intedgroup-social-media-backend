@@ -34,3 +34,32 @@ This is a backend for a social media application built with Node.js, Express, an
 ```bash
 git clone https://github.com/hichri-louay/intedgroup-social-media-backend.git
 cd intedgroup-social-media-backend
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+```
+
+3.Create a .env file in the root directory with the following variables:
+
+```bash
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+SALT=your_bcrypt_salt
+JWT_SECRET=your_jwt_secret_key
+EXPIRE_IN=your_expires_in
+```
+
+4. Run server:
+```bash
+npm run dev
+```
+
+The server will run on http://localhost:5000.
+
+
+## API Documentation
+
+You can access the API documentation at http://localhost:5000/docs once the server is running.
