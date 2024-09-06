@@ -79,4 +79,23 @@ module.exports.deleteComment = async (req, res) => {
     } catch (error) {
       return errorResponse(res, error.message);
     }
-  };   
+  };
+  
+  module.exports.getAllPosts = async (req, res) => {
+    try {
+      const posts = await postService.getAllPosts();
+      return successResponse(res, posts,'Get all posts successfully',200);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };
+  
+  module.exports.getPostsByUser = async (req, res) => {
+    try {
+      const {userId} = req.params;
+      const posts = await postService.getPostsByUser(userId);
+      return successResponse(res, posts,'Get posts by user successfully',200);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };  

@@ -99,6 +99,20 @@ const deleteComment = async (postId, commentId, userId) => {
     return post;
   };
 
+const getAllPosts = async () => {
+    const posts = await Post.find()
+      .populate('user', '-password')
+      .populate('comments.user', '-password');
+    return posts;
+  };
+  
+const getPostsByUser = async (userId) => {
+    const posts = await Post.find({ user: userId })
+      .populate('user', '-password')
+      .populate('comments.user', '-password');
+    return posts;
+  };  
+
 
 module.exports = { 
     createPost,
@@ -107,5 +121,7 @@ module.exports = {
     deletePost, 
     updatePost,
     deleteComment,
-    updateComment
+    updateComment,
+    getAllPosts,
+    getPostsByUser
 };
