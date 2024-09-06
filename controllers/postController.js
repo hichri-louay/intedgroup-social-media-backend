@@ -67,4 +67,16 @@ module.exports.deleteComment = async (req, res) => {
     } catch (error) {
       return errorResponse(res, error.message);
     }
-  };  
+  };
+  
+  module.exports.updateComment = async (req, res) => {
+    try {
+      const { postId, commentId } = req.params;
+      const userId = req.userId;
+      const {content} = req.body
+      await postService.updateComment(postId, commentId, userId, content);
+      return successResponse(res, commentId,'Comment updated successfully',200);
+    } catch (error) {
+      return errorResponse(res, error.message);
+    }
+  };   

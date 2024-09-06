@@ -9,6 +9,6 @@ router.post('/:postId/comment', authMiddleware, postController.commentPost);
 router.delete('/:postId', authMiddleware, postController.deletePost);
 router.put('/:postId', authMiddleware, postController.updatePost);
 router.delete('/:postId/comment/:commentId', authMiddleware, postController.deleteComment);
-
+router.put('/:postId/comment/:commentId', authMiddleware, postController.updateComment);
 
 module.exports = router;
