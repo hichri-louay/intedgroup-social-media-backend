@@ -10,7 +10,7 @@ router.delete('/:postId', authMiddleware, postController.deletePost);
 router.put('/:postId', authMiddleware, postController.updatePost);
 router.delete('/:postId/comment/:commentId', authMiddleware, postController.deleteComment);
 router.put('/:postId/comment/:commentId', authMiddleware, postController.updateComment);
-router.get('/', postController.getAllPosts);
-router.get('/user/:userId', postController.getPostsByUser);
+router.get('/', authMiddleware ,postController.getAllPosts);
+router.get('/user/:userId', authMiddleware,postController.getPostsByUser);
 
 module.exports = router;
