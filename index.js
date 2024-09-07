@@ -6,6 +6,7 @@ const swaggerSpec = require('./config/swaggerConfig');
 const authRoutes = require('./routes/authRoutes');
 const postRoutes = require('./routes/postRoutes');
 const profileRoutes = require('./routes/profileRoutes');
+const cors = require('cors');
 require('dotenv').config();
 
 
@@ -14,7 +15,7 @@ const PORT = process.env.PORT || 3000;
 
 connectDB();
 
-
+app.use(cors('*'));
 app.use(express.json());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
