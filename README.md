@@ -1,4 +1,4 @@
-# Intedgroup Social Media Backend
+# Social Media Backend
 
 This is a backend for a social media application built with Node.js, Express, and MongoDB. It features user authentication, post creation, likes, comments, and more.
 
